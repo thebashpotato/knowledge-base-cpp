@@ -61,7 +61,7 @@ template <typename T> class Stack
     }
 
     /// @brief Gets the length of the stack
-    [[nodiscard]] auto size() noexcept -> std::size_t
+    [[nodiscard]] auto Size() noexcept -> std::size_t
     {
         return m_size;
     }

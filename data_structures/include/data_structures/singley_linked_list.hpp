@@ -68,7 +68,7 @@ template <typename T> class LinkedList
         ++m_size;
     }
 
-    [[nodiscard]] auto size() noexcept -> std::size_t
+    [[nodiscard]] auto Size() noexcept -> std::size_t
     {
         return m_size;
     }

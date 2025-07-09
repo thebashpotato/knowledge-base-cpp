@@ -75,13 +75,13 @@ template <typename K, typename V> class LRUCache
 
   public:
     /// @brief Returns the number of elements in the cache
-    [[nodiscard]] auto size() const noexcept -> std::size_t
+    [[nodiscard]] auto Size() const noexcept -> std::size_t
     {
         return m_size;
     }
 
     /// @brief Returns the maximum number of elements in the cache
-    [[nodiscard]] auto max_size() const noexcept -> std::size_t
+    [[nodiscard]] auto MaxSize() const noexcept -> std::size_t
     {
         return m_max_size;
     }

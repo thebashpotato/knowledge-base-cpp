@@ -59,7 +59,7 @@ template <typename T> class Queue
         return opt;
     }
 
-    [[nodiscard]] auto size() const noexcept -> std::size_t
+    [[nodiscard]] auto Size() const noexcept -> std::size_t
     {
         return m_size;
     }

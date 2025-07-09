@@ -7,14 +7,14 @@
 namespace Kbase::DataStructures
 {
 
-/// @brief A circular buffer, it has a fixed size which wraps around upon reaching
+/// @brief A circular buffer, it has a fixed Size which wraps around upon reaching
 /// the end, effectively using the same memory space in a cyclic manner. This structure
 /// is particulary usefull in situtations where data is continuously produced and consumed
 /// at different rates.
 template <typename T> class RingBuffer
 {
   public:
-    explicit RingBuffer(const std::size_t size) : m_buffer(size), m_capacity(size)
+    explicit RingBuffer(const std::size_t Size) : m_buffer(Size), m_capacity(Size)
     {
     }
 
@@ -52,28 +52,28 @@ template <typename T> class RingBuffer
         return (!m_is_full && (m_head == m_tail));
     }
 
-    [[nodiscard]] auto size() const noexcept -> std::size_t
+    [[nodiscard]] auto Size() const noexcept -> std::size_t
     {
-        std::size_t size = m_capacity;
+        std::size_t Size = m_capacity;
 
         if (!m_is_full)
         {
             if (m_tail >= m_head)
             {
-                size = m_tail - m_head;
+                Size = m_tail - m_head;
             }
             else
             {
-                size = m_capacity + m_tail - m_head;
+                Size = m_capacity + m_tail - m_head;
             }
         }
-        return size;
+        return Size;
     }
 
   private:
     // underlying data structure we are using
     std::vector<T> m_buffer;
-    // fixed size
+    // fixed Size
     std::size_t m_capacity;
     // read pointer
     std::size_t m_head{};

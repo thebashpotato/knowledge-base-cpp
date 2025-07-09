@@ -1,6 +1,13 @@
-#include <gtest/gtest.h>
+#include <cstddef>
+#include <cstdint>
+#include <string>
 
-#include <data_structures/core.hpp>
+#include <data_structures/lru.hpp>
+#include <data_structures/queue.hpp>
+#include <data_structures/singley_linked_list.hpp>
+#include <data_structures/stack.hpp>
+
+#include <gtest/gtest.h>
 
 using namespace Kbase::DataStructures;
 
@@ -13,7 +20,7 @@ TEST(SingleyLinkedList, TestPushFront)
     list.PushFront(2);
     list.PushFront(1);
 
-    const auto size_cache = list.size();
+    const auto size_cache = list.Size();
     ASSERT_EQ(size_cache, 4);
 }
 
@@ -26,13 +33,13 @@ TEST(SingleyLinkedList, TestPopFront)
     list.PushFront(2);
     list.PushFront(1);
 
-    const auto size_cache = list.size();
+    const auto size_cache = list.Size();
     ASSERT_EQ(size_cache, 4);
 
     const auto opt = list.PopFront();
     ASSERT_EQ(opt.has_value(), true);
     ASSERT_EQ(opt.value(), 1);
-    ASSERT_EQ(list.size(), size_cache - 1);
+    ASSERT_EQ(list.Size(), size_cache - 1);
 }
 
 TEST(SingleyLinkedList, TestPushBack)
@@ -45,7 +52,7 @@ TEST(SingleyLinkedList, TestPushBack)
     list.PushBack(4);
     list.PushBack(5);
 
-    ASSERT_EQ(list.size(), 5);
+    ASSERT_EQ(list.Size(), 5);
 }
 
 TEST(QueueTestSuite, TestEnqueue)
@@ -58,7 +65,7 @@ TEST(QueueTestSuite, TestEnqueue)
     queue.Enqueue(4);
     queue.Enqueue(5);
 
-    ASSERT_EQ(queue.size(), 5);
+    ASSERT_EQ(queue.Size(), 5);
 }
 
 TEST(QueueTestSuite, TestPeek)
@@ -71,11 +78,11 @@ TEST(QueueTestSuite, TestPeek)
     queue.Enqueue(4);
     queue.Enqueue(5);
 
-    ASSERT_EQ(queue.size(), 5);
+    ASSERT_EQ(queue.Size(), 5);
     const auto front = queue.Peek();
     ASSERT_EQ(front.has_value(), true);
     ASSERT_EQ(front.value(), 1);
-    ASSERT_EQ(queue.size(), 5);
+    ASSERT_EQ(queue.Size(), 5);
 }
 
 TEST(QueueTestSuite, TestDeque)
@@ -88,11 +95,11 @@ TEST(QueueTestSuite, TestDeque)
     queue.Enqueue(4);
     queue.Enqueue(5);
 
-    ASSERT_EQ(queue.size(), 5);
+    ASSERT_EQ(queue.Size(), 5);
     const auto front = queue.Deque();
     ASSERT_EQ(front.has_value(), true);
     ASSERT_EQ(front.value(), 1);
-    ASSERT_EQ(queue.size(), 4);
+    ASSERT_EQ(queue.Size(), 4);
 }
 
 TEST(StackTestSuite, TestPush)
@@ -105,7 +112,7 @@ TEST(StackTestSuite, TestPush)
     stack.Push(4);
     stack.Push(5);
 
-    ASSERT_EQ(stack.size(), 5);
+    ASSERT_EQ(stack.Size(), 5);
     ASSERT_EQ(stack.Empty(), false);
 }
 
@@ -119,9 +126,9 @@ TEST(StackTestSuite, TestPop)
     stack.Push(4);
     stack.Push(5);
 
-    ASSERT_EQ(stack.size(), 5);
+    ASSERT_EQ(stack.Size(), 5);
 
-    const auto size = stack.size();
+    const auto size = stack.Size();
 
     for (std::size_t i = 0; i < size; ++i)
     {
@@ -129,7 +136,7 @@ TEST(StackTestSuite, TestPop)
         ASSERT_EQ(opt.has_value(), true);
     }
 
-    ASSERT_EQ(stack.size(), 0);
+    ASSERT_EQ(stack.Size(), 0);
     ASSERT_EQ(stack.Empty(), true);
 }
 
@@ -138,8 +145,8 @@ TEST(LRUTestSuite, Test1)
     constexpr std::size_t max_size = 3;
     auto lru = LRUCache<std::string, int>(max_size);
 
-    ASSERT_EQ(lru.max_size(), max_size);
-    ASSERT_EQ(lru.size(), 0);
+    ASSERT_EQ(lru.MaxSize(), max_size);
+    ASSERT_EQ(lru.Size(), 0);
     ASSERT_EQ(lru.Empty(), true);
 
     ASSERT_EQ(lru.Get("foo").has_value(), false);
